@@ -10,7 +10,7 @@
 #include <stdexcept>
 #include <cstddef>
 
-namespace gpaser {
+namespace gparser {
 
     class Lexer {
 

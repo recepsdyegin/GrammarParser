@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace gpaser {
+namespace gparser {
 
     struct TokenPosition {
         size_t line;
