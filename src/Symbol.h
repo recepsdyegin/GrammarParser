@@ -4,28 +4,32 @@
 #include <vector>
 #include <memory>
 
-struct Symbol {
-    virtual ~Symbol() = default;
-    
-};
+namespace gparser {
 
-struct TerminalSymbol : public Symbol {
+    struct Symbol {
+        virtual ~Symbol() = default;
 
-    std::string text;
-};
+    };
 
-struct ReferenceSymbol : public Symbol {
-    std::string name;
-};
+    struct TerminalSymbol : public Symbol {
 
-struct NonTerminalSymbol : public Symbol {
-    std::vector<std::shared_ptr<Symbol>> children;
-};
+        std::string text;
+    };
 
-struct SequenceSymbol : NonTerminalSymbol {};
+    struct ReferenceSymbol : public Symbol {
+        std::string name;
+    };
 
-struct ChoiceSymbol : NonTerminalSymbol {};
+    struct NonTerminalSymbol : public Symbol {
+        std::vector<std::shared_ptr<Symbol>> children;
+    };
 
-struct OptionSymbol : NonTerminalSymbol {};
+    struct SequenceSymbol : NonTerminalSymbol {};
 
-struct RepetitionSymbol : NonTerminalSymbol {};
+    struct ChoiceSymbol : NonTerminalSymbol {};
+
+    struct OptionSymbol : NonTerminalSymbol {};
+
+    struct RepetitionSymbol : NonTerminalSymbol {};
+
+}

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstddef>
 #include <string>
 #include <unordered_map>
@@ -25,16 +27,16 @@ namespace gparser {
         TokenPosition position;
 
         std::string getPositionString() {
-            return "Line: " + std::to_string(position.line) + "Col: " + std::to_string(position.column);
+            return "Line: " + std::to_string(position.line) + ", Col: " + std::to_string(position.column);
         };
     };
 
     struct TokensInExpression {
         Token lhsToken;
-        std::pmr::vector<Token> rhsTokens;
+        std::vector<Token> rhsTokens;
     };
 
-    inline std::pmr::unordered_map<char, TokenType> tokenMap = {
+    inline std::unordered_map<char, TokenType> tokenMap = {
         {'|', TokenType::PIPE},
         {'(', TokenType::LPAREN},
         {')', TokenType::RPAREN},
@@ -43,4 +45,4 @@ namespace gparser {
         {'{', TokenType::LBRACE},
         {'}', TokenType::RBRACE}
     };
-};
+}

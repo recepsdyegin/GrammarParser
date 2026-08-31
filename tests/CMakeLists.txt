@@ -26,6 +26,11 @@ add_executable(tests
     src/lexer/lexer-1.cpp
 )
 
+target_include_directories(tests
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/lexer
+)
+
 target_link_libraries(tests
     PRIVATE
     GTest::gtest_main

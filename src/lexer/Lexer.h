@@ -36,6 +36,12 @@ namespace gparser {
         public:
         std::vector<TokensInExpression> tokenize(const std::string& input) {
 
+            // reset per-call state so the same Lexer instance can be reused
+            currentLine = 0;
+            currentColumn = 0;
+            expressionCount = 0;
+            pos = 0;
+
             auto sizeOfInput = input.size();
             std::vector<TokensInExpression> tokens;
             
@@ -107,7 +113,7 @@ namespace gparser {
                     if (!onRhs) {
                         throw std::runtime_error(std::string(LOG_TAG) + "Unallowed brackret on the left-hand side. ");
                     }
-                    tokensInExpression.rhsTokens.push_back({tokenMap[input[pos]], std::string(1, input[pos])});
+                    tokensInExpression.rhsTokens.push_back({tokenMap[input[pos]], std::string(1, input[pos]), getCurrentPosition()});
                     advance();
                     continue;
                 }
