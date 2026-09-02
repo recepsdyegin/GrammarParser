@@ -37,7 +37,7 @@ TEST(LexerTest, PipeAndGroupingTokens) {
     auto exprs = lexer.tokenize("expr : 'a' | ( 'b' ) ;");
 
     ASSERT_EQ(exprs.size(), 1u);
-    const auto& rhs = exprs[0].rhsTokens;
+    const auto &rhs = exprs[0].rhsTokens;
     ASSERT_EQ(rhs.size(), 5u);
     EXPECT_EQ(rhs[0].type, TokenType::TERMINAL);
     EXPECT_EQ(rhs[1].type, TokenType::PIPE);
@@ -51,7 +51,7 @@ TEST(LexerTest, BraceAndBracketTokens) {
     auto exprs = lexer.tokenize("r : { 'a' } [ 'b' ] ;");
 
     ASSERT_EQ(exprs.size(), 1u);
-    const auto& rhs = exprs[0].rhsTokens;
+    const auto &rhs = exprs[0].rhsTokens;
     ASSERT_EQ(rhs.size(), 6u);
     EXPECT_EQ(rhs[0].type, TokenType::LBRACE);
     EXPECT_EQ(rhs[2].type, TokenType::RBRACE);

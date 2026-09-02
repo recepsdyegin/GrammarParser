@@ -1,0 +1,1 @@
+find . \( -name '*.cpp' -o -name '*.cc' -o -name '*.c' -o -name '*.h' -o -name '*.hpp' \) -exec clang-format -i -style='{IndentWidth: 4, TabWidth: 4}' {} +
