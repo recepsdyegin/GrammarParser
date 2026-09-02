@@ -108,10 +108,9 @@ TEST(LexerTest, TokenizeCanBeCalledMultipleTimes) {
 
 // --- documented current behaviour -----------------------------------------
 
-// A rule that is not closed with ';' is currently dropped silently.
-TEST(LexerTest, RuleWithoutSemicolonIsDropped) {
+TEST(LexerTest, RuleWithoutSemicolonThrows) {
     Lexer lexer;
-    EXPECT_TRUE(lexer.tokenize("expr : 'a'").empty());
+    EXPECT_THROW(lexer.tokenize("expr : 'a'"), std::runtime_error);
 }
 
 // --- error handling -------------------------------------------------------
@@ -139,4 +138,20 @@ TEST(LexerTest, UnterminatedTerminalThrows) {
 TEST(LexerTest, UnknownCharacterThrows) {
     Lexer lexer;
     EXPECT_THROW(lexer.tokenize("a : @ ;"), std::runtime_error);
+}
+
+TEST(LexerTest, PositionTest) {
+    Lexer lexer;
+    auto exprs = lexer.tokenize("a : 'x' ;\nb : 'y' ;\n");
+
+    ASSERT_EQ(exprs.size(), 2u);
+    EXPECT_EQ(exprs[0].lhsToken.position.line, 0u);
+    EXPECT_EQ(exprs[0].lhsToken.position.column, 0u);
+    EXPECT_EQ(exprs[0].rhsTokens[0].position.line, 0u);
+    EXPECT_EQ(exprs[0].rhsTokens[0].position.column, 4u);
+
+    EXPECT_EQ(exprs[1].lhsToken.position.line, 1u);
+    EXPECT_EQ(exprs[1].lhsToken.position.column, 0u);
+    EXPECT_EQ(exprs[1].rhsTokens[0].position.line, 1u);
+    EXPECT_EQ(exprs[1].rhsTokens[0].position.column, 4u);
 }
