@@ -11,7 +11,6 @@ struct Symbol {
 };
 
 struct TerminalSymbol : public Symbol {
-
     std::string text;
 };
 
