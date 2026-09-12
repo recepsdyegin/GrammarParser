@@ -97,6 +97,25 @@ std::shared_ptr<Symbol> parseSequence(const std::vector<Token> &tokens, size_t &
     return symbol;
 }
 
+std::shared_ptr<Symbol> parseChoice(const std::vector<Token> &tokens, size_t &i) {
+
+    std::vector<std::shared_ptr<Symbol>> items;
+    items.push_back(parseSequence(tokens, i));
+
+    while(i < tokens.size() && tokens[i].type == TokenType::PIPE) {
+        i++; // skip PIPE
+        items.push_back(parseSequence(tokens, i));
+    }
+    
+    if(items.size() == 1) {
+        return items[0];
+    }
+
+    auto symbol = std::make_shared<ChoiceSymbol>();
+    symbol->children = items;
+    return symbol;
+}
+
 
 
 } // namespace gparser

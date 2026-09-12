@@ -1,16 +1,14 @@
-#include "src/lexer/Lexer.h"
-#include <iostream>
+    #include "src/lexer/Lexer.h"
+    #include "src/Parser.h"
+    #include <iostream>
 
-int main() {
-    gparser::Lexer lexer;
-    try {
-        auto exprs = lexer.tokenize("expr : 'a' | b ;");
-        for (auto &e : exprs) {
-            std::cout << "LHS: " << e.lhsToken.text << "\n";
-            for (auto &t : e.rhsTokens)
-                std::cout << "  RHS: " << t.text << "\n";
-        }
-    } catch (const std::exception &ex) {
-        std::cerr << ex.what() << "\n";
+    int main() {
+
+        gparser::Lexer lexer;
+
+        auto exprs = lexer.tokenize("a : 'x' { 'y' | 'z' } ;");
+        size_t i = 0;
+        auto tree = gparser::parseChoice(exprs[0].rhsTokens, i);
+        std::cout << tree->toString();
+
     }
-}
