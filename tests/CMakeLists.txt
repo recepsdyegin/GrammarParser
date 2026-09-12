@@ -24,11 +24,13 @@ enable_testing()
 
 add_executable(tests
     src/lexer/lexer-1.cpp
+    src/parser/parser-1.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/lexer/Lexer.cpp
 )
 
 target_include_directories(tests
     PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/lexer
 )
 

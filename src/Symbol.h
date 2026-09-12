@@ -6,8 +6,7 @@
 
 namespace gparser {
 
-
-
+    
 struct Symbol {
     virtual ~Symbol() = default;
     virtual std::string toString(int depth = 0) const = 0;
