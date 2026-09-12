@@ -155,3 +155,8 @@ TEST(LexerTest, PositionTest) {
     EXPECT_EQ(exprs[1].rhsTokens[0].position.line, 1u);
     EXPECT_EQ(exprs[1].rhsTokens[0].position.column, 4u);
 }
+
+TEST(LexerTest, TrailingBackslashThrows) {
+    Lexer lexer;
+    EXPECT_THROW(lexer.tokenize("a : 'x\\"), std::runtime_error);
+}

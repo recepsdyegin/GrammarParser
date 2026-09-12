@@ -29,7 +29,7 @@ struct Token {
     std::string text;
     TokenPosition position;
 
-    inline std::string getPositionString() {
+    inline std::string getPositionString() const {
         return "Line: " + std::to_string(position.line) +
                ", Col: " + std::to_string(position.column);
     };

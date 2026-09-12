@@ -60,6 +60,9 @@ gparser::Lexer::tokenize(const std::string &input) {
             while (pos < sizeOfInput && input[pos] != '\'') {
                 if (input[pos] == '\\') {
                     advance();
+                    if(pos >= sizeOfInput) {
+                        break;
+                    }
                     text += input[pos];
                     advance();
                     continue;
@@ -106,7 +109,7 @@ gparser::Lexer::tokenize(const std::string &input) {
             if (!onRhs) {
                 throw std::runtime_error(
                     std::string(LOG_TAG) +
-                    "Unallowed brackret on the left-hand side. ");
+                    "Unallowed bracket on the left-hand side. ");
             }
             tokensInExpression.rhsTokens.push_back({bracketMap[input[pos]],
                                                     std::string(1, input[pos]),
