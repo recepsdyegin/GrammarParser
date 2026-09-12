@@ -54,11 +54,15 @@ So `a b | c` groups as `(a b) | c`.
         Lexer.cpp     implementation
       Symbol.h        Symbol hierarchy + toString
       Parser.h        parseTerm / parseSequence / parseChoice
+
     tests/
       CMakeLists.txt
       run-tests.py
       src/lexer/
         lexer-1.cpp   lexer tests
+      src/parser/
+        parser-1.cpp  parser tests
+
     main.cpp          scratch demo
 
 ## Status
@@ -67,9 +71,9 @@ Done:
 - Lexer — splits text into tokens, tracks line/column, reports errors
 - Symbol hierarchy with `toString` for inspection
 - `parseTerm`, `parseSequence`, `parseChoice` — builds the tree for one rule
+- Tests for both lexer and parser layers
 
 Not done:
-- Parser tests
 - Rule table (`map<string, Symbol>`) to resolve `ReferenceSymbol`
 - A driver that walks every rule instead of just one
 - `parse()` on the tree — matching actual input against the grammar
@@ -82,7 +86,7 @@ Tests:
     cd tests
     python3 run-tests.py
 
-Scratch demo:
+Demo:
 
     g++ -std=c++20 main.cpp src/lexer/Lexer.cpp -o main
     ./main
